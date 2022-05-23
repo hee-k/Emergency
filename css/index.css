@@ -1,0 +1,131 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+a:hover{
+    text-decoration: none;
+    color: inherit;
+}
+.intro_bg {
+    position: fixed;
+    width: 100%;
+    height: 500px;
+    background-color: rgb(206, 206, 206);
+}
+.intro_text {
+    width: 100%;
+    margin: 200px auto 200px auto;
+    text-align: center;
+}
+.intro_text h5 {
+    padding: 20px;
+}
+
+.banner_wrapper {
+    position: fixed;
+    width: 180px;
+    height: 400px;
+    margin: 45px;
+    overflow: hidden;
+    text-align: center;
+    transition: 0.5s ease-out;
+}
+.banners {
+    width: 180px;
+    height: 400px;
+    border: 2px solid black;
+    float: left;
+    margin-bottom: 20px;
+}
+.btns {
+    position: fixed;
+    width: 180px;
+    height: 400px;
+    margin: 45px;
+    padding-top: 340px;
+}
+.btn1 {
+    width: 20px;
+    height: 20px;
+    background-color: #ccc;
+    padding: 4px;
+    border-radius: 50px;
+}
+.btn2 {
+    width: 20px;
+    height: 20px;
+    background-color: #ccc;
+    padding: 4px;
+    border-radius: 50px;
+}
+
+.slide_wrapper {
+    position: relative;
+    width: 1000px;
+    height: 200px;
+    margin: 550px auto 0 auto;
+    overflow: hidden;
+    text-align: center;
+}
+.slides {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.slides.animated {
+    transition: 0.5s ease-out;
+}
+.slides li {
+    width: 220px;
+    height: 200px;
+    border: 2px solid #ccc;
+    border-radius: 30px;
+    float: left;
+    list-style: none;
+}
+.slides li:not(:last-child) {
+    margin-right: 30px;
+}
+.slides li:hover {
+    color: black;
+    opacity: 0.7;
+    cursor: pointer;
+}
+.controls {
+    text-align: center;
+    margin-top: 20px;
+    cursor: pointer;
+    padding-left: 20px;
+    padding-top: 20px;
+}
+.prev{
+    width: 50px;
+    height: 20px;
+    background-color: #ccc;
+    padding: 4px;
+    border-radius: 10px
+}
+.next{
+    width: 50px;
+    height: 20px;
+    background-color: #ccc;
+    padding: 4px;
+    border-radius: 10px
+}
+.prev:hover {
+    color: gray;
+}
+.next:hover {
+    color: gray;
+}
+.slides li i {
+    color: black;
+    padding-top: 20px;
+}
+.slides li i:hover{
+    color: red;
+}

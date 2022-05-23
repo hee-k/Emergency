@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emergency</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"></head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./css/style.css">
     <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.html">
-                <img src="./images/logo.png" alt="" width="35" height="35">
+                <i class="fa-solid fa-person-running fa-1x" style="color:red"></i>
                 일상 속 위기 탈출
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -58,7 +58,175 @@
             </div>
         </div>
     </nav>
+    <div class="title">
+        <h1><b>온도로 인한 부상</b></h1>
+        <h6>온도로 인해 부상을 당하신 경우 다음 메뉴에서 대처 방법을 확인하실 수 있습니다.</h6>
+        <h6>화상, 열사병, 열사병, 동상의 부상을 확인하고 알맞은 방법으로 대처하세요.</h6>
+    </div>
+    <div class="categories">
+        <ul>
+            <li data-bs-toggle="modal" data-bs-target="#burn" style="background:url('./images/BurnImg.jpg'); background-size: cover"></li>
+            <li data-bs-toggle="modal" data-bs-target="#heatstroke" style="background:url('./images/HeatstrokeImg.jpg'); background-size: cover"></li>
+            <li data-bs-toggle="modal" data-bs-target="#sunstroke" style="background:url('./images/SunstrokeImg.jpg'); background-size: cover"></li>
+            <li data-bs-toggle="modal" data-bs-target="#frostbite" style="background:url('./images/FrostbiteImg.jpg'); background-size: cover"></li>
+        </ul>
+    </div>
+    <div class="btn_wrapper">
+        <ul>
+            <li>
+                <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#burn">
+                    &nbsp화상&nbsp
+                </button>
+            <li>
+            <li><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#heatstroke">
+                    열사병
+                </button>
+            <li>
+            <li><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#sunstroke">
+                    일사병
+                </button>
+            <li>
+            <li><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#frostbite">
+                    &nbsp동상&nbsp
+                </button>
+            <li>
+        </ul>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="burn" tabindex="-1" aria-labelledby="burnLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="burnLabel">화상 응급처치</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h5><b>#열기 식히기</b></h5>
+                    <img src="images/burn01.jpg"><br>
+                    화상 부위를 찬물에 20분 이상 담가 열기를 식힌다.<br>
+                    흐르는 물 또는 물수건으로도 가능하나, 절대 문지르지 않는다.<br>
+                    뜨거운 액체에 화상을 입은 경우 옷을 벗기지 않고 냉각시킨다.<br><hr>
 
+                    <h5><b>#물집 터뜨리지 않기</b></h5>
+                    <img src="images/burn02.jpg"><br>
+                    물집은 절대 터뜨리지 말아야한다.<br>
+                    로션, 된장, 간장, 소주 등은 세균감염을 일으키므로 절대 바르지 않는다.<br><hr>
+
+                    <h5><b>#붕대로 감기</b></h5>
+                    <img src="images/burn03.jpg"><br>
+                    화상 부위에 바세린이나 화상 거즈(깨끗한 거즈)로 덮어주고 붕대로 감아준다.<br>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="heatstroke" tabindex="-1" aria-labelledby="heatstrokeLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="heatstrokeLabel">열사병의 응급처치</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h5><b>#열사병 증상</b></h5>
+                    <img src="images/heatstroke01.jpg"><br>
+                    온도와 습도가 높은 곳에서 몸의 열을 내보내지 못할 때 발생한다.<br>
+                    피부가 뜨겁고 건조하며 붉은색으로 변하고, 체온이 높아져 어지러움과 피로를 느끼다가 갑자기 의식을 잃고 쓰러진다.<br><hr>
+
+                    <h5><b>#시원한 장소로 이동</b></h5>
+                    <img src="images/heatstroke02.jpg"><br>
+                    그늘이나 시원한 장소로 이동하여 옷을 벗긴 후 119에 신고한다.<br><hr>
+
+                    <h5><b>#체온 내리기</b></h5>
+                    <img src="images/heatstroke03.jpg"><br>
+                    몸에 물을 뿌리거나 몸 전체를 젖은 수건으로 감싸고<br>
+                    강한 바람으로 증발시켜 체온을 신속히 내리도록 한다.<br><hr>
+
+                    <h5><b>#습도가 높은 경우의 체온 내리기</b></h5>
+                    <img src="images/heatstroke04.jpg"><br>
+                    습도가 높은 경우 얼음을 수건에 싸서 겨드랑이와 사타구니에 대 주어 체온을 내린다.<br>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="sunstroke" tabindex="-1" aria-labelledby="sunstrokeLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="sunstrokeLabel">일사병의 응급처치</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h5><b>#일사병 증상</b></h5>
+                    <img src="images/sunstroke01.jpg"><br>
+                    강한 햇볕에 오랜 시간 노출되었을 때 발생한다.<br>
+                    두통, 무기력감, 현기증, 피부가 차갑고 축축해지며 얼굴은 창백해진다.<br>
+                    심하면 졸도한다. 체온은 정상이거나 약간 올라간다.<br><hr>
+
+                    <h5><b>#시원한 장소로 이동</b></h5>
+                    <img src="images/sunstroke02.jpg"><br>
+                    그늘지고 시원한 장소로 환자를 옮긴다.<br><hr>
+
+                    <h5><b>#수분 섭취</b></h5>
+                    <img src="images/sunstroke03.jpg"><br>
+                    옷을 벗기고 소금이 들어간 찬물이나 이온 음료<br>
+                    또는 일반 찬물을 마셔 수분을 섭취하게 한다.<br><hr>
+
+                    <h5><b>#몸 적시기</b></h5>
+                    <img src="images/sunstroke04.jpg"><br>
+                    시원한 물을 뿌려 주거나 젖은 물수건으로 몸을 적셔 준다.<br><hr>
+
+                    <h5><b>#상태 관찰</b></h5>
+                    <img src="images/sunstroke05.jpg"><br>
+                    체온이 내려가도록 부채질을 해 주고 상태를 관찰한다.<br>
+                    30분 안에 증상이 회복되지 않으면 병원으로 옮긴다.<br>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="frostbite" tabindex="-1" aria-labelledby="frostbiteLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="frostbiteLabel">동상 응급처치</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h5><b>#혈액순환 방해 물건 제거</b></h5>
+                    <img src="images/frostbite01.jpg"><br>
+                    추위를 막을 수 있는 곳으로 환자를 이동시킨다.<br>
+                    혈액순환에 방해가 되는 반지나 시계, 젖은 신발, 장갑 등을 제거한다.<br><hr>
+
+                    <h5><b>#따뜻하게 해주기</b></h5>
+                    <img src="images/frostbite02.jpg"><br>
+                    동상이 걸린 손이나 발을 겨드랑이에 집어넣는 등<br>
+                    사람의 체온으로 따뜻하게 해 준다.<br><hr>
+
+                    <h5><b>#따뜻한 물에 담그기</b></h5>
+                    <img src="images/frostbite03.jpg"><br>
+                    동상 부위를 체온과 비슷한 온도(38~42℃)의 물에 담근다.<br><hr>
+
+                    <h5><b>#상처 부위 보호 후 병원 이송</b></h5>
+                    <img src="images/frostbite04.jpg"><br>
+                    피부의 색깔과 감각이 돌아오면 물기를 말리고<br>
+                    상처 부위를 감싸서 보호하고, 병원으로 이송한다.<br>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/8d7f9ad8fc.js" crossorigin="anonymous"></script>
+    <script src="./scripts/script.js"></script>
 </body>
 </html>

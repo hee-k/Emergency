@@ -3,8 +3,8 @@ var slide = document.querySelectorAll('.slides li'); // .slide li
 var currentIdx = 0; // 현재 index (slide 위치 파악용 )
 var slideCount = slide.length;
 var orgslideCount = slide.length;
-var slideWidth = 200;
-var slideMargin = 30;
+var slideWidth = 220;
+var slideMargin = 31;
 var prevBtn = document.querySelector('.prev');
 var nextBtn = document.querySelector('.next');
 
@@ -64,10 +64,10 @@ function moveSlide(num){
     }
 }
 // 이전, 다음 버튼
-nextBtn.addEventListener('click',function(){
+nextBtn.addEventListener('click', function(){
     moveSlide(currentIdx + 1);
 });
-prevBtn.addEventListener('click',function(){
+prevBtn.addEventListener('click', function(){
     moveSlide(currentIdx - 1);
 });
 
@@ -77,7 +77,7 @@ function autoSlide(){
     if(timer == undefined){
         timer = setInterval(function(){
             moveSlide(currentIdx + 1);
-        }, 3000);
+        }, 2000);
     }
 }
 autoSlide();
@@ -92,4 +92,12 @@ slides.addEventListener('mouseenter', function(){
 });
 slides.addEventListener('mouseleave', function(){
     autoSlide();
+});
+
+// 배너
+document.querySelector('.btn1').addEventListener('click', function(){
+    document.querySelector('.banner_wrapper').style.transform = 'translate(+0px)';
+});
+document.querySelector('.btn2').addEventListener('click', function(){
+    document.querySelector('.banner_wrapper').style.transform = 'translate(-180px)';
 });
