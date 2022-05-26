@@ -13,7 +13,7 @@ makeClone();
 // 앞, 뒤로 슬라이드 복사본 생성
 function makeClone() {
     for(var i = 0; i < slideCount; i++) {
-        var cloneSlide = slide[i].cloneNode(true); // 요소 복사(자식까지 전체)
+        var cloneSlide = slide[i].cloneNode(true); // 요소 복사
         cloneSlide.classList.add('clone');
         slides.appendChild(cloneSlide); // 원래 요소 뒤에 추가
     }
@@ -94,7 +94,7 @@ slides.addEventListener('mouseleave', function(){
     autoSlide();
 });
 
-// 배너
+// 배너(수정중)
 document.querySelector('.btn1').addEventListener('click', function(){
     document.querySelector('.banner_wrapper').style.transform = 'translate(+0px)';
 });
