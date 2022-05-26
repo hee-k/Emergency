@@ -4,14 +4,47 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emergency</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"></head>
-    <link rel="stylesheet" href="style.css">
-    <body>
+    <title>Bruise</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/index.css">
+    <style>
+        #navbar-example2 {
+            position: sticky;
+            top: 0;
+            z-index: 1
+        }
+        .common-caution {
+            clear: both;
+            position: relative;
+            margin-top: 20px;
+            padding: 12px 30px;
+            border: 1px solid #eadfdb;
+            background: #fcf5f2;
+            color: #cc3300;
+            line-height: 1.6em;
+            overflow: hidden;
+        }
+        .common-caution h5 {
+            padding-left: 30px;
+            background: url('') 0 center no-repeat;
+            margin: 0 0 8px;
+            color: #cc3300;
+        }
+        .common-caution {
+            padding: 8px 15px;
+        }
+        ul {
+            list-style: none;
+            padding-left: 0px;
+        }
+    </style>
+</head>
+<body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.html">
-                <img src="./images/logo.png" alt="" width="35" height="35">
+                <i class="fa-solid fa-person-running fa-1x" style="color:red"></i>
                 일상 속 위기 탈출
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -58,7 +91,155 @@
             </div>
         </div>
     </nav>
+    <nav id="navbar-example2" class="navbar bg-light px-3">
+        <a class="navbar-brand">빠른이동</a>
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a class="nav-link" href="#scrollspyHeading1">타박상 응급처치</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#scrollspyHeading2">찰과상 응급처치</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#scrollspyHeading3">탈골 응급처치</a>
+            </li>
+    
+        </ul>
+    </nav>
+    <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-root-margin="0px 0px -40%"
+        data-bs-smooth-scroll="true" class="scrollspy-example" tabindex="0">
+    </div>
+    
+    <center>
+        <h1 id="scrollspyHeading1"><br>타박상에 의한 손상시 응급처치</h1>
+    </center>
+    <div>
+        <img style="position: absolute; left: 20%; z-index: -1;" src="./images/bruise.gif" />
+        <iframe title="YouTube video player"
+            allow="picture-in-picture; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope" width="550"
+            height="350" ID="subframe" NAME="subframe" SRC="https://www.youtube.com/embed/B66jkWkb9kE?autoplay=1&mute=1"
+            STYLE="position: absolute; top: 240px; left: 60%;" allowfullscreen></iframe>
+    </div>
+    
+    <center>
+        <h3>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br>R.I.C.E 요법
+        </h3>
+        <p>
+            근육의 타박상 관절의 염좌등의 부상에서 가장중요한 것은 손상 후 24시간 이내에 R.I.C.E(안정-Rest, 냉찜질-Ice, 압박-Compression, 거상-Elevation)요법을 적용하는
+            것입니다.<br> 근육과 같은 연부조직이 손상을 받게되면 주변 혈관들도 함께 손상을 받게되고 이로 인해 혈액이 손상부위에 모이게 될뿐만 아니라 인접한 조직들이 압박을 받게 됩니다. <br>
+            이러한 압박은 이차적인 조직의 손상을 유발하게 되므로 손상부위의 출혈을 최소화 하여야 됩니다.<br><br><br></p>
+        <h3>
+            안정,휴식(Rest)</h3>
+        <img margin="auto" width="580" height="380" src="./images/hurt1.png" />
+        <p>
+            부상을 당했다면 활동을 멈추어야 합니다. 그렇지 않으면 출혈이 많아지고 붓기도 심해집니다.<br> 다리를 다쳤다면 즉시 목발을 사용하거나 주변사람들의 부축을 받아 활동을 최소화하여야 합니다.
+            <br>팔을 다쳤다면
+            다치지 않은 팔로 부상당한 팔의 움직임을 최소화 하여야 합니다.<br><br><br><br></p>
+        <h3>
+            냉찜질(Ice)</h3>
+        <img margin="auto" width="580" height="380" src="./images/hurt2.png" />
+        <p>
+            손상직후 바로 냉찜질법을 적용해야 하며 이는 손상부위의 대사활동을 감소시켜줍니다. 손상 후 1-2시간 마다 한번씩 15분 정도 냉찜질을해줍니다. <br>젤의 형태나 팩 형태의 얼음주머니를
+            사용합니다.<br><br><br><br></p>
+        <h3>
+            압박(Compression)</h3>
+        <img margin="auto" width="580" height="380" src="./images/hurt3.png" />
+        <p>
+            압박은 흔히 탄력붕대를 사용하는 것이 좋은 방법입니다. 손상부위의 적절한 압박은 손상부위의 출혈 및 부종을감소시켜줍니다. <br>압박은 냉찜질 전, 후에 실시하여야 합니다. 압박붕대를 감을 때 주의점은
+            단단히
+            감는 것은 좋으나 통증이 있을 정도의 단단함은 좋지 않습니다. <br>또한 심장에서 먼 곳 에서 가까운 쪽으로 감아주는 것이 좋습니다.<br><br><br><br></p>
+        <h3>
+            거상(Elevation)</h3>
+        <img margin="auto" width="580" height="380" src="./images/hurt4.png" />
+        <p>
+            거상은 부상부위를 심장높이 보다 높게 들어 올려주는 것입니다. 손상부위의 거상은 손상부위의 압력을 낮춰주어 붓기를 줄여줍니다.<br></p>
+        <div class="common-caution">
+            <h5>⚠ R.I.C.E 요법은 치료가 아닙니다 ⚠</h5>
+            <ul class="common-list">
+                <li><span class="text-color-default"> R.I.C.E 요법은 부상 후 추가적인 손상을 줄여주고 회복에 도움을 줄 수 있지만 이것이 근본적 치료는 아닙니다.
+                        <br>부상 후 초기에는R.I.C.E 요법을 적용하고 곧바로 가까운 병원에서 부상부위에 대한
+                        진료를 보는 것이 최선의 방법입니다.</span></li>
+    
+            </ul>
+        </div>
+    </center>
+    
+    <center>
+        <h1 id="scrollspyHeading2"><br><br>찰과상에 의한 손상시 응급처치<br><br></h1>
+    </center>
+    <img style="position: absolute; left: 20%;" src="./images/bruise2.webp" />
+    <iframe title="YouTube video player"
+        allow="picture-in-picture; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope" width="550"
+        height="350" ID="subframe" NAME="subframe" SRC="https://www.youtube.com/embed/Mf8MLjHM2EU?autoplay=1&mute=1"
+        STYLE="position: absolute; top: 3420px; left: 60%;" allowfullscreen></iframe>
+    
+    <center>
+        <h3>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>상처 세척
+        </h3>
+        <img margin="auto" width="580" height="380" src="./images/bruse1.png" />
+        <p>
+            찰과상을 치료하기 전에 균에 감염될 수 있는 위험성을 낮춰놓아야 합니다.<br>
+            찰과상 자체는 별로 큰 부상이 아니지만, 균에 감염되면 심하게 아플 수 있습니다.<br> 물과 비누로 꼼꼼히 손을 씻은 다음에 상처를 치료합니다<br><br><br><br></p>
+        <h3>
+            지혈하기</h3>
+        <img margin="auto" width="580" height="380" src="./images/bruse2.png" />
+        <p>
+            일단 손을 씻은 다음에 찰과상을 치료합니다. 찰과상의 정도에 따라 지혈을 해야 할 수도 있습니다. <br>
+            일반적으로 가벼운 찰과상인 경우, 출혈이 심하지 않으며 작은 상처는 보통 출혈이 저절로 멎습니다. <br>상처에서 계속 피가 나면 멸균 거즈나 붕대를 상처에 갖다줍니다. 상처를 계속 꽉
+            눌러줍니다.<br><br><br><br></p>
+        <h3>
+            상처 세척하기</h3>
+        <img margin="auto" width="580" height="380" src="./images/bruse3.png" />
+        <p>
+            어느 정도 지혈이 되면 상처를 조심스럽게, 꼼꼼히 세척해 균에 감염되지 않도록 합니다. <br>식염수가 있으면 식염수로 상처 주변을 세척합니다. 식염수가 없으면 차가운 물로 씻어줍니다. 상처를 자극해
+            다시 피가 나지 않도록 조심합니다.<br><br><br><br></p>
+        <h3>
+            상처 드레싱</h3>
+        <img margin="auto" width="580" height="380" src="./images/bruse4.png" />
+        <p>
+            상처 드레싱를 하기 전에 먼저 항생제 연고나 항생제 크림을 얇게 펴발라줍니다. <br>이렇게 하면 상처 표면을 보습하고 상처가 자연스럽게 아무는 데 도움이 되며 감염을 예방할 수 있습니다.<br>
+            연고를 발랐으면 메디폼 같은 습윤드레싱제품으로 상처 부위를 감싸줍니다.<br><br><br><br></p>
+    </center>
+    
+    <center>
+        <h1 id="scrollspyHeading3"><br><br>탈골시 응급처치<br><br></h1>
+    </center>
+    <img style="position: absolute; left: 20%; " src="./images/talgol.png" width="550" height="350" />
+    <iframe title="YouTube video player"
+        allow="picture-in-picture; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope" width="550"
+        height="350" ID="subframe" NAME="subframe" SRC="https://www.youtube.com/embed/a_fJ8_sSHzw?autoplay=1&mute=1"
+        STYLE="position: absolute; top: 6380px; left: 55%;" allowfullscreen></iframe>
+    
+    <center>
+        <h3>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>의사가 아닌 사람이 탈구를 바로잡으려 해서는 안됩니다
+        </h3>
+        <img margin="auto" width="580" height="380" src="./images/talgol1.png" />
+        <p>
+            비전문가가 어긋난 뼈를 제자리로 맞추려다가 더 큰 사고로 이어질수있습니다.<br><br><br><br></p>
+        <h3>
+            부상한 부분을 편하게 하고 찬 물수건으로 찜질을 해줍니다</h3>
+        <img margin="auto" width="580" height="380" src="./images/talgol2.png" />
+        <p>
+            찜질을 해줌으로서 탈구된 부위의 고통을 갈아 앉히며, 붓기를 예방해줍니다. <br><br><br><br></p>
+        <h3>
+            충격을 방지합니다</h3>
+        <img margin="auto" width="580" height="380" src="./images/talgol3.png" />
+        <p>
+            탈골 부위가 외부충격에 노출되지 않도록 충격을 방지해 줍니다.<br><br><br><br></p>
+        <h3>
+            이동할 때 손상받은 부위가 움직이지 않도록 합니다</h3>
+        <img margin="auto" width="580" height="380" src="./images/talgol4.png" />
+        <p>
+            병원에 도착하기 전까지 탈구된 부위가 움직이지 못하도록 단단하게 고정을 시킨후, 병원으로 신속히 이동합니다.<br><br><br><br></p>
+    </center>
+    </section>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/8d7f9ad8fc.js" crossorigin="anonymous"></script>
 </body>
 </html>

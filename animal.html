@@ -1,17 +1,51 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emergency</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"></head>
-    <link rel="stylesheet" href="style.css">
-    <body>
+    <title>Animal</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/index.css">
+    <style>
+        #navbar-example2 {
+            position: sticky;
+            top: 0;
+            z-index: 1
+        }
+        .common-caution {
+            clear: both;
+            position: relative;
+            margin-top: 20px;
+            padding: 12px 30px;
+            border: 1px solid #eadfdb;
+            background: #fcf5f2;
+            color: #cc3300;
+            line-height: 1.6em;
+            overflow: hidden;
+        }
+        .common-caution h5 {
+            padding-left: 30px;
+            background: url('') 0 center no-repeat;
+            margin: 0 0 8px;
+            color: #cc3300;
+        }
+        .common-caution {
+            padding: 8px 15px;
+        }
+        ul {
+            list-style: none;
+            padding-left: 0px;
+        }
+    </style>
+</head>
+<body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.html">
-                <img src="./images/logo.png" alt="" width="35" height="35">
+                <i class="fa-solid fa-person-running fa-1x" style="color:red"></i>
                 일상 속 위기 탈출
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -58,7 +92,127 @@
             </div>
         </div>
     </nav>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <nav id="navbar-example2" class="navbar bg-light px-3">
+        <a class="navbar-brand">빠른이동</a>
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a class="nav-link" href="#bee">벌한테 쏘였을때</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#snake">뱀한테 물렸을때</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#dog">동물한테 물렸을때</a>
+            </li>
+        </ul>
+    </nav>
+    <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-root-margin="0px 0px -40%"
+        data-bs-smooth-scroll="true" class="scrollspy-example" tabindex="0"></div>
+    
+    <center>
+        <h1 id="bee"><br>벌에 쏘였을시 응급처치</h1>
+    </center>
+    
+    <div>
+        <img style="position: absolute; left: 30%; top: 280px;" src="./images/bee.jpg" />
+        <iframe title="YouTube video player"
+            allow="picture-in-picture; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope" width="550"
+            height="350" ID="subframe" NAME="subframe" SRC="https://www.youtube.com/embed/kuEphbssvBI?autoplay=1&mute=1"
+            STYLE="position: absolute; top: 240px; left: 53%;" allowfullscreen></iframe>
+    </div>
+    
+    <center>
+        <h3>
+            <br><br><br><br><br><br><br><br><br><br><br><br>벌침 찾기
+        </h3>
+        <img margin="auto" width="580" height="380" src="./images/bee1.png" />
+        <p>
+            빨갛게 부어오른 부위에 검은 점처럼 보이는 벌침을 찾아주세요<br><br><br><br></p>
+        <h3>
+            벌침 제거</h3>
+        <img margin="auto" width="580" height="380" src="./images/bee2.png" />
+        <p>
+            신용카드 등을 이용해 피부를 긁어내듯 침을 제거해주세요<br><br><br><br></p>
+        <h3>
+            통증(부기) 완화</h3>
+        <img margin="auto" width="580" height="380" src="./images/bee3.png" />
+        <p>
+            상처 부위에 얼음주머니를 대 통증과 부기를 가라앉혀주세요<br></p>
+        <div class="common-caution">
+            <h5>⚠주의사항⚠</h5>
+            <ul class="common-list">
+                <li><span class="text-color-default">1. 집게, 핀셋 또는 손가락을 이용하여 침의 끝부분을 집어서 제거할 경우 독주머니를 짜는 행위가 되어 오히려 벌침 안에
+                        남아 있는 독이 더 몸 안으로 들어갈 수 있습니다.</span></li>
+                <li><span class="text-color-default">2. 전신성 과민반응이 나타나는 사람에게는 병원으로 이송하는 동안에 질식할 가능성이 있으므로 입으로 아무것도 먹이지
+                        않도록 합니다.</span></li>
+                <li><span class="text-color-default">3. 야외에서는 음료수의 뚜껑을 열어둔 상태로 보관하지 않도록 합니다.</span></li>
+            </ul>
+        </div>
+    </center>
+    <center>
+        <h1 id="snake"><br>뱀에 물렸을시 응급처치<br><br></h1>
+    </center>
+    <div>
+        <img style="position: absolute; left: 20%; " src="./images/snake.jpg" width="550" height="350" />
+        <iframe title="YouTube video player"
+            allow="picture-in-picture; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope" width="550"
+            height="350" ID="subframe" NAME="subframe" SRC="https://www.youtube.com/embed/RD9we87Sam4?autoplay=1&mute=1"
+            STYLE="position: absolute; top: 2450px; left: 53%;" allowfullscreen></iframe>
+    </div>
+    
+    <center>
+        <h3>
+            <br><br><br><br><br><br><br><br><br><br><br><br>독사여부 확인
+        </h3>
+        <img margin="auto" width="580" height="380" src="./images/snake1.png" />
+        <p>
+            뱀에 물렸을 때의 상처자국을 보고 독사여부를 확인합니다.<br>
+            * 머리가 삼각형이고 물린 앞쪽에 두 개의 이빨 자국이면 독사<br><br><br><br></p>
+        <h3>
+            환자 안정</h3>
+        <img margin="auto" width="580" height="380" src="./images/snake2.png" />
+        <p>
+            환자를 눕혀서 안정시킨 뒤 움직이지 않게 합니다.<br><br><br><br></p>
+        <h3>
+            압박하여 묶기</h3>
+        <img margin="auto" width="580" height="380" src="./images/snake3.png" />
+        <p>
+            물린곳에서 5~10cm 위를 적당한 압력으로 묶어 독이 퍼지지않게 합니다.<br><br><br><br></p>
+        <h3>
+            신속하게 병원으로 이송</h3>
+        <img margin="auto" width="580" height="380" src="./images/snake4.png" />
+        <p>
+            몸을 고정시키고 손상부위를 심장보다 낮게 하여 신속하게 병원으로 이송합니다.<br><br><br><br></p>
+        <center>
+            <h1 id="dog"><br>동물(개)에게 물렸을때<br><br></h1>
+        </center>
+        <div>
+            <img style="position: absolute; left: 20%; " src="./images/dog.jpg" width="550" height="350" />
+            <iframe title="YouTube video player"
+                allow="picture-in-picture; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope" width="550"
+                height="350" ID="subframe" NAME="subframe" SRC="https://www.youtube.com/embed/8yr5zHo8daY?autoplay=1&mute=1"
+                STYLE="position: absolute; top: 5165px; left: 53%;" allowfullscreen></iframe>
+        </div>
+    </center>
+    <center>
+        <h3>
+            <br><br><br><br><br><br><br><br><br><br><br><br>표피상처 (할퀸상처)
+        </h3>
+        <img margin="auto" width="580" height="380" src="./images/dog1.png" />
+        <p>
+            1. 상처 부위를 흐르는 물에 비누로 5~10분간 깨끗이 씻어줍니다<br>
+            2. 말린 후 접착드레싱이나 작은 알코올드레싱으로 덮어줍니다.<br><br><br><br></p>
+        <h3>
+            깊은상처</h3>
+        <img margin="auto" width="580" height="380" src="./images/dog2.png" />
+        <p>
+            1. 직접 압박을 하거나 물린 부위를 들어올려서 지혈합니다.<br>
+            2. 상처를 소독된 거즈나 깨끗한 패드로 덮고 붕대를 감아줍니다.<br>
+            3. 병/의원을 방문하여 적절한 처치를 받도록 합니다.<br><br><br><br></p>
+    </center>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/8d7f9ad8fc.js" crossorigin="anonymous"></script>
 </body>
 </html>

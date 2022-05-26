@@ -1,17 +1,51 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emergency</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"></head>
-    <link rel="stylesheet" href="style.css">
-    <body>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/index.css">
+    <style>
+        #navbar-example2 {
+            position: sticky;
+            top: 0;
+            z-index: 1
+        }
+        .common-caution {
+            clear: both;
+            position: relative;
+            margin-top: 20px;
+            padding: 12px 30px;
+            border: 1px solid #eadfdb;
+            background: #fcf5f2;
+            color: #cc3300;
+            line-height: 1.6em;
+            overflow: hidden;
+        }
+        .common-caution h5 {
+            padding-left: 30px;
+            background: url('') 0 center no-repeat;
+            margin: 0 0 8px;
+            color: #cc3300;
+        }
+        .common-caution {
+            padding: 8px 15px;
+        }
+        ul {
+            list-style: none;
+            padding-left: 0px;
+        }
+    </style>
+</head>
+<body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.html">
-                <img src="./images/logo.png" alt="" width="35" height="35">
+                <i class="fa-solid fa-person-running fa-1x" style="color:red"></i>
                 일상 속 위기 탈출
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -58,7 +92,97 @@
             </div>
         </div>
     </nav>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <nav id="navbar-example2" class="navbar bg-light px-3">
+        <a class="navbar-brand">빠른이동</a>
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a class="nav-link" href="#car">차량 침수시 탈출할때</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#cut">절단사고 발생시 응급처치</a>
+            </li>
+        </ul>
+    </nav>
+    <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-root-margin="0px 0px -40%"
+        data-bs-smooth-scroll="true" class="scrollspy-example" tabindex="0"></div>
+    <center>
+        <h1 id="car"><br>차량 침수시 안전하게 탈출하는 방법</h1>
+    </center>
+    <div>
+        <img style="position: absolute; left: 20%; top: 280px;" src="./images/car.png" width="550" height="350" />
+        <iframe title="YouTube video player"
+            allow="picture-in-picture; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope" width="550"
+            height="350" ID="subframe" NAME="subframe" SRC="https://www.youtube.com/embed/-gutUGFoTXs?autoplay=1&mute=1"
+            STYLE="position: absolute; top: 280px; left: 53%;" allowfullscreen></iframe>
+    </div>
+    <center>
+        <h3>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>안전띠 신속하게 풀기
+        </h3>
+        <img margin="auto" width="580" height="380" src="./images/car1.png" />
+        <p>
+            차량이 물에 빠졌을때 신속히 안전띠를 풀어주세요<br>
+            아직 물에 가라앉지 않았으면 안전띠를 풀고 바로 탈출해야합니다.<br><br><br><br></p>
+        <h3>
+            창문 열기</h3>
+        <img margin="auto" width="580" height="380" src="./images/car2.png" />
+        <p>
+            물에 침수됬을때 수압때문에 문이 열리지 않습니다. 이때는 신속하게 창문을 열어 탈출할수 있습니다.<br><br><br><br></p>
+        <h3>
+            머리 받침대를 사용하자</h3>
+        <img margin="auto" width="580" height="380" src="./images/car3.png" />
+        <p>
+            창문이 열리지 않을경우, 머리 받침대를 창문 모서리 부분에 가격해 창문을 깨고 탈출합니다.<br><br><br><br></p>
+        <h3>
+            문이 열릴때까지 기다리자</h3>
+        <img margin="auto" width="580" height="380" src="./images/car4.png" />
+        <p>
+            침수 직후에는 내·외부 압력차로 문이 열리지 않아요. 수위차가 30cm 이하가 될때까지 침착하게 기다려줍니다.<br><br><br><br></p>
+        <h3>
+            숨을 크게 들이쉬어라</h3>
+        <img margin="auto" width="580" height="380" src="./images/car5.png" />
+        <p>
+            차가 완전히 물에 잠기기전에 숨을 크게 들이쉰후 숨을 참고 문을 열어서 탈출합니다.<br><br><br><br></p>
+        <center>
+            <h1 id="cut"><br>손가락(발가락) 잘렸을때 응급처치<br><br></h1>
+        </center>
+        <div>
+            <img style="position: absolute; left: 20%;" src="./images/cut.png" width="550" height="350" />
+            <iframe title="YouTube video player"
+                allow="picture-in-picture; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
+                width="550" height="350" ID="subframe" NAME="subframe"
+                SRC="https://www.youtube.com/embed/a9Tb6acvms4?autoplay=1&mute=1"
+                STYLE="position: absolute; top: 3560px; left: 53%;" allowfullscreen></iframe>
+        </div>
+        <center>
+            <h3>
+                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>절단부위 챙겨주기
+            </h3>
+            <img margin="auto" width="580" height="380" src="./images/cut1.png" />
+            <p>
+                우선, 즉시 119에 신고를한후 상처를 압박하거나 높이 들어 올려 지혈해주세요<br>
+                깨끗하고 단단한 거즈와 붕대로 절단부위를 감싸주면서 환자의 쇼크를 방지해 줍니다.<br>
+                절단된 부위를 생리식염수로 씻어 깨끗한 거즈로 감싸줍니다.<br><br><br><br></p>
+            <h3>
+                절단부위 보관</h3>
+            <img margin="auto" width="580" height="380" src="./images/cut2.png" />
+            <p>
+                거즈로 감싼 후 다시 큰 타월로 싼 후 밀봉하여 얼음과 물 1:1의 비율로 섞은 용기에 봉지를 담아 냉장 상태를 유지합니다.<br><br><br><br></p>
+            <h3>
+                병원으로 이송</h3>
+            <img margin="auto" width="580" height="380" src="./images/cut3.png" />
+            <p>
+                환자와 함께 접합 가능한 전문 병원으로 재빨리 이송합니다.<br></p>
+            <div class="common-caution">
+                <h5>⚠주의사항⚠</h5>
+                <ul class="common-list">
+                    <li><span class="text-color-default">1. 절단 부위를 절대 닦지 마세요.</span></li>
+                    <li><span class="text-color-default">2. 절단 부위에 솜을 직접 대지 마세요</span></li>
+                    <li><span class="text-color-default">3. 절단 부위가 얼음물에 직접 닿지 않도록 합니다.</span></li>
+                </ul>
+            </div>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+                crossorigin="anonymous"></script>
 </body>
 </html>
