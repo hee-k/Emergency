@@ -224,58 +224,7 @@
                 </div>
         </table>
     </div>
-    <script>
-        var slideIndex = 0; //slide index
-
-        // HTML 로드가 끝난 후 동작
-        window.onload=function(){
-        showSlides(slideIndex);
-
-        // Auto Move Slide
-        var sec = 4000;
-        setInterval(function(){
-            slideIndex++;
-            showSlides(slideIndex);
-
-        }, sec);
-        }
-
-        // Next/previous controls
-        function moveSlides(n) {
-        slideIndex = slideIndex + n
-        showSlides(slideIndex);
-        }
-
-        // Thumbnail image controls
-        function currentSlide(n) {
-        slideIndex = n;
-        showSlides(slideIndex);
-        }
-
-        function showSlides(n) {
-
-        var slides = document.getElementsByClassName("mySlides");
-        var dots = document.getElementsByClassName("dot");
-        var size = slides.length;
-
-        if ((n+1) > size) {
-            slideIndex = 0; n = 0;
-        }else if (n < 0) {
-            slideIndex = (size-1);
-            n = (size-1);
-        }
-
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-        }
-        for (i = 0; i < dots.length; i++) {
-            dots[i].className = dots[i].className.replace(" active", "");
-        }
-
-        slides[n].style.display = "block";
-        dots[n].className += " active";
-        }
-    </script>
+    <script src="./scripts/cpr.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/8d7f9ad8fc.js" crossorigin="anonymous"></script>
 </body>
