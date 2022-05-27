@@ -3,4 +3,4 @@
 
 - 응급 상황에 처했을 때 대처 방안을 손쉽게 찾을 수 있는 사이트
 - 대처 방안과 관련된 게임을 통해 재미있는 학습 가능
-- [일상 속 위기 탈출](emergency-team1.netlify.app){:target="_blank}
+- site : [일상 속 위기 탈출](emergency-team1.netlify.app){:target="_blank"}
