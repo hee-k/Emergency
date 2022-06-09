@@ -12,11 +12,17 @@
     margin: 0 auto 50px auto;
     text-align: center;
 }
-.canvas_wrapper {
+#canvas_cpr {
     text-align: center;
     margin: 0 auto 0 auto;
     font-size: small;
-}
-#canvas_cpr {
     border: 1px solid;
+    display: none;
+}
+#canvas_img {
+    text-align: center;
+    margin: 0 auto 0 auto;
+    font-size: small;
+    border: 1px solid;
+    display: block;
 }
