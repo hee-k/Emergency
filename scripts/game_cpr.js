@@ -67,7 +67,22 @@ Helper.prototype.next = function() {
 }
 
 var canvas_cpr = document.getElementById("canvas_cpr");
+var canvas_img = document.getElementById("canvas_img");
 var ctx = canvas_cpr.getContext("2d");
+var ctx_img = canvas_img.getContext("2d");
+
+var startImg = "./images/game_cpr/start.png";
+var ruleImg = "./images/game_cpr/rule.png";
+var middleImg = "./images/game_cpr/middle.png";
+var endImg = "./images/game_cpr/end.png";
+var replayBreathImg = "./images/game_cpr/replayBreath.png";
+var replayCompressionImg = "./images/game_cpr/replayCompression.png";
+
+// 이미지 화면 확인
+var ruleImgOpen = false;
+var startImgOpen = true;
+var replayCompressionImgOpen = false;
+var replayBreathImgOpen = false;
 
 var helper = { // 구급대원 위치, 크기
     x : 350,
@@ -92,18 +107,20 @@ var heart = { // 하트 위치, 크기
     x : [],
     y : 20,
     width : 60,
-    height : 55
+    height : 55,
+    orgX : 0
 }
 heart.x[0] = 40;
+heart.orgX = heart.x[0];
 var cloud = { // 구름 위치, 크기
     x : [],
-    y : 25,
+    y : 35,
     width : 35,
     height : 35,
     orgX : 0,
     orgY : 0
 }
-cloud.x[0] = 25;
+cloud.x[0] = 38;
 cloud.orgX = cloud.x[0];
 cloud.orgY = cloud.y;
 var arc = { // 원 위치, 크기
@@ -127,41 +144,42 @@ var arrow = { // 화살표 위치, 크기
     width : 50,
     height : 50
 }
+var time = { // 시간 위치
+    x : 45,
+    y : 130
+}
 
 var BackgroundImg = new Image();
-BackgroundImg.src ="./images/game_cpr/backgroundImg.png";
+BackgroundImg.src ="./images/game_cpr/background.png";
 var PatientImg = new Image();
 PatientImg.src = "./images/game_cpr/patient.png";
 var TextImg = new Image();
 TextImg.src = "./images/game_cpr/text.png";
+var timeRemaining = 20;         // 남은 시간
+var orgTimeRemaining = timeRemaining;
+var FPS = 50;
 
 // 흉부압박에 필요한 변수
 var HelperChestImg = new Helper("./images/game_cpr/compression", helper.imgCount);
-var compressionNum = 16; // 흉부압박 성공에 필요한 횟수
+var compressionNum = 16;        // 흉부압박 성공에 필요한 횟수
 var HeartImg = new Check("./images/game_cpr/heart", compressionNum);
-
-var compression = false;           // 흉부압박 실행여부
-var compressionCount = 0;          // 흉부압박 횟수
-// var compressionTimer = 0;          // 일정 Frame 이후 helperChest up
-// var compressionSpeed = 6;          // 흉부압박 속도
-// var orgHelperChestY = helperChest.y;  // 초기 helperChest y위치
-var timeRemaining = 20;
-var FPS = 50;
+var compression = false;        // 흉부압박 실행여부
+var compressionCount = 0;       // 흉부압박 횟수
 var compressionSuccess = false; // 흉부압박 최종 성공여부
-var makeCompress = false; // 흉부압박 시키기
-var playCompresstion;
-var startMakeCompress;
-var stopMakeCompress;
-var playBreath;
+var makeCompression = false;    // 흉부압박 시키기
+var playCompression,
+    startMakeCompression,
+    stopMakeCompression,
+    playBreath;
 
 // 인공호흡에 필요한 변수
-var HelperBreathImg = new Helper("./images/game_cpr/breath", 1);
-var breathNum = 40; // 인공호흡 성공에 필요한 횟수
+var HelperBreathImg = new Helper("./images/game_cpr/breath", 12);
+var breathNum = 20;             // 인공호흡 성공에 필요한 횟수
 var CloudImg = new Check("./images/game_cpr/cloud", breathNum);
-var breathCount = 0; // 인공호흡 횟수
-var breath = false; // 인공호흡 실행여부
-var breathSuccess = false; // 인공호흡 최종 성공여부
-var ArrowImg = [];  // 화살표 이미지
+var breathCount = 0;            // 인공호흡 횟수
+var breath = false;             // 인공호흡 실행여부
+var breathSuccess = false;      // 인공호흡 최종 성공여부
+var ArrowImg = [];              // 화살표 이미지
 for (var i = 0; i < 4; i++) {
     ArrowImg[i] = new Image();
     ArrowImg[i].src = "./images/game_cpr/arrow" + (i + 37) + ".png";
@@ -172,7 +190,7 @@ var left = {
     width : arrow.width,
     height : arrow.height,
     img : ArrowImg[0],
-    breath : false
+    catch : false
 }
 var up = {
     x : arrow.x+9 + rect.width*1,
@@ -180,7 +198,7 @@ var up = {
     width : arrow.width,
     height : arrow.height,
     img : ArrowImg[1],
-    breath : false
+    catch : false
 }
 var right = {
     x : arrow.x+13 + rect.width*2,
@@ -188,7 +206,7 @@ var right = {
     width : arrow.width,
     height : arrow.height,
     img : ArrowImg[2],
-    breath : false
+    catch : false
 }
 var down = {
     x : arrow.x+17 + rect.width*3,
@@ -196,30 +214,25 @@ var down = {
     width : arrow.width,
     height : arrow.height,
     img : ArrowImg[3],
-    breath : false
+    catch : false
 }
-var speed = 5; // 화살표 하강 속도
-var speedUp = 0.01; // 화살표 하강 속도 증가
-var startLocation = []; // 화살표 시작 위치(랜덤)
-var firstStart = true; // 처음 시작하는지 확인
-var accuracy = 3; // 화살표 체크 정확도(/)
+var speed = 3;              // 화살표 하강 속도
+var orgSpeed = speed;
+var speedUp = 0.05;         // 화살표 하강 속도 증가
+var startLocation = [];     // 화살표 시작 위치(랜덤)
+var firstStart = true;      // 처음 시작하는지 확인
+var accuracy = 2;           // 화살표 체크 정확도(/)
 
-// 인공호흡 진행 시간 체크
-var today = new Date();
-var startMin;
-var startHour;
-var currentMin;
-var currentHour;
-
+// 흉부압박
 function Compress() {
-    playCompresstion = setInterval(function () {
+    playCompression = setInterval(function () {
         ctx.clearRect(0, 0, canvas_cpr.width, canvas_cpr.height);
         ctx.beginPath();
         ctx.drawImage(BackgroundImg, 0, 0, canvas_cpr.width, canvas_cpr.height);
         ctx.drawImage(PatientImg, patient.x, patient.y, patient.width, patient.height);
         HelperChestImg.next();
         ctx.drawImage(HelperChestImg.image(), helper.x, helper.y, helper.width, helper.height);
-        if(makeCompress == true){
+        if(makeCompression == true){
             ctx.drawImage(TextImg, text.x, text.y, text.width, text.height);
             ctx.fillStyle = "rgba(255, 212, 0, 0.8)";
             ctx.arc(arc.x, arc.y, arc.r, 0, Math.PI * 2);
@@ -227,115 +240,106 @@ function Compress() {
             compression = false;
         }
 
-        // if(compression == true) {
-        //     ctx.fillStyle = "rgba(255, 212, 0, 0.5)";
-        //     ctx.arc(arc.x, arc.y, arc.r, 0, Math.PI * 2);
-        //     ctx.fill();
-        //     compression = false;
-        // }
         // 상단 하트 이미지 출력
         for (var i = 0; i < compressionNum; i++) {
             ctx.drawImage(HeartImg.image(i), heart.x[i], heart.y, heart.width, heart.height);
             heart.x[i+1] = heart.x[i] + HeartImg.width;
-            // console.log(heart.x[i]);
         }
         // 남은 시간
         if(Math.round(timeRemaining) <= 5){
             ctx.fillStyle = "red";
             ctx.font = "bold 30px Arial";
-            ctx.fillText("TIME : " + Math.round(timeRemaining), 45, 130);
+            ctx.fillText("TIME : " + Math.round(timeRemaining), time.x, time.y);
         }else if(Math.round(timeRemaining) <= 10 && Math.round(timeRemaining) >= 6){
             ctx.fillStyle = "purple";
             ctx.font = "bold 30px Arial";
-            ctx.fillText("TIME : " + Math.round(timeRemaining), 45, 130);
+            ctx.fillText("TIME : " + Math.round(timeRemaining), time.x, time.y);
         }else{
             ctx.fillStyle = "black";
             ctx.font = "bold 30px Arial";
-            ctx.fillText("TIME : " + Math.round(timeRemaining), 45, 130);
+            ctx.fillText("TIME : " + Math.round(timeRemaining), time.x, time.y);
         }
         // 성공 or 실패
-        if((timeRemaining <= 0 && compressionCount >= compressionNum) || (compressionCount >= compressionNum)) {
-            ctx.fillStyle = "red";
-            ctx.font = "bold 60px Arial";
-            ctx.fillText("CPR 성공", (canvas_cpr.width / 2) - 120, (canvas_cpr.height / 2) + 30);
+        if(timeRemaining >= 0 && compressionCount >= compressionNum) {
+            clearInterval(playCompression);
+            clearInterval(startMakeCompression);
+            clearInterval(stopMakeCompression);
             compressionSuccess = true;
-            // Breathe 시작 시간
-            startMin = today.getMinutes();
-            startHour = today.getHours();
-            Breathe();
-            clearInterval(playCompresstion);
-            clearInterval(startMakeCompress);
-            clearInterval(stopMakeCompress);
+            // 인공호흡으로 넘어가는 이미지
+            PrintImg(ctx_img, middleImg, 0, 0, canvas_img.width, canvas_img.height);
+            canvas_img.style.display = "block";
+            canvas_cpr.style.display = "none";
+            setTimeout(function() {
+                canvas_cpr.style.display = "block";
+                canvas_img.style.display = "none";
+                timeRemaining = orgTimeRemaining;
+                Breathe();
+            }, 5000);
+            // Breathe();
         } else if(timeRemaining <= 0 && compressionCount < compressionNum){
-            ctx.fillStyle = "red";
-            ctx.font = "bold 60px Arial";
-            ctx.fillText("CPR 실패", (canvas_cpr.width / 2) - 120, (canvas_cpr.height / 2) + 30);
-            // 다시 시작하려면 R
-            ctx.font = "bold 20px Arial";
-            ctx.fillText("Press R to play again", (canvas_cpr.width / 2) - 85, (canvas_cpr.height / 2) + 60);
+            clearInterval(playCompression);
+            clearInterval(startMakeCompression);
+            clearInterval(stopMakeCompression);
+            replayCompressionImgOpen = true;
+            PrintImg(ctx_img, replayCompressionImg, 0, 0, canvas_img.width, canvas_img.height);
+            canvas_img.style.display = "block";
+            canvas_cpr.style.display = "none";
         }
         // 시간 흐름
         if(timeRemaining > 0 && compressionSuccess == false) {
             timeRemaining -= 1/30;
         }
-        // // cpr 실행 시(input space bar)
-        // if(compression == true) {
-        //     compression = false;
-        //     // helperChest.y += compressionSpeed;
-        //     // compressionTimer++;
-        // }
-        // // // 일정 Frame 이후 helperChest up
-        // // if(compressionTimer > 8) {
-        // //     compression = false;
-        // //     helperChest.y -= compressionSpeed;
-        // //     if(helperChest.y ==  orgHelperChestY) {
-        // //         compressionTimer = 0;
-        // //     }
-        // // }
-                
     }, FPS);
 }
-// Compression 시키기
-function MakeCompress(){
-    startMakeCompress = setInterval(function(){
-        makeCompress = true;
+// "Compression" 나타나기
+function MakeCompression(){
+    startMakeCompression = setInterval(function(){
+        makeCompression = true;
     }, (Math.floor(Math.random() * (2000-1000+1)) + 1000));
-    stopMakeCompress = setInterval(function(){
-            makeCompress = false;
+    stopMakeCompression = setInterval(function(){
+        makeCompression = false;
     }, (Math.floor(Math.random() * (1000-800+1)) + 800));
 }
 // 재시작(변수 초기화)
-function ReStart() {
-    compressionCount = 0;
-    //orgHelperChestY = helperChest.y;
-    timeRemaining = 10;
-    heart.x[0] = 390;
-    HeartImg.empty(compressionNum);
+function Replay() {
+    timeRemaining = orgTimeRemaining;
+    if(replayCompressionImgOpen == true) {
+        compressionCount = 0;
+        heart.x[0] = heart.orgX;
+        HeartImg.empty(compressionNum);
+    }
+    if(replayBreathImgOpen == true) {
+        breathCount = 0;
+        speed = orgSpeed;
+        firstStart = true;
+        cloud.x[0] = cloud.orgX;
+        CloudImg.empty(breathNum);
+    }
 }
-function CompressClick(event){
+// 흉부압박 시 클릭 이벤트
+canvas_cpr.onselectstart = function () {
+    return false;
+}
+canvas_cpr.addEventListener("click", function(event){
     // 마우스 좌표
     var x = event.clientX - canvas_cpr.offsetLeft;
     var y = event.clientY - canvas_cpr.offsetTop;
 
-    // 도형의 좌표
+    // 도형의 좌표(arc)
     var shapeX = arc.x - arc.r;
     var shapeY = arc.y - arc.r;
     var shapeS = arc.x + arc.r - shapeX;
 
-    if((makeCompress == true) && (x >= shapeX && x <= shapeX + shapeS) && (y >= shapeY && y <= shapeY + shapeS)){
+    if((makeCompression == true) && (x >= shapeX && x <= shapeX + shapeS) && (y >= shapeY && y <= shapeY + shapeS)){
     // if((x >= shapeX && x <= shapeX + shapeS) && (y >= shapeY && y <= shapeY + shapeS)){ // 테스트용
         compression = true;
-        makeCompress = false;
+        makeCompression = false;
         compressionCount++;
         HeartImg.fill();
     }
-}
-function CompressKeyDown(event) {
-    if((timeRemaining <= 0 && compressionCount < compressionNum) && Event.keyCode == 82){
-        ReStart();
-    }
-    // MyEvent.preventDefault();
-}
+    // event.preventDefault();
+});
+
 function Breathe() {
     playBreath = setInterval(function(){
         ctx.clearRect(0, 0, canvas_cpr.width, canvas_cpr.height);
@@ -353,15 +357,28 @@ function Breathe() {
             }
             // 10의 자리 수가 짝수 => 왼쪽에 출력
             else if(i != 0 && (((i / 10) % 2 == 0) && (i % 10 == 0))){
-                cloud.x[i] = 20;
+                cloud.x[i] = cloud.orgX;
                 cloud.y += 50;
             }
             // 10의 자리가 홀수 => 오른쪽에 출력
             else if ((i / 10) % 2 != 0 && (i % 10 == 0)){
-                cloud.x[i] += 455;
+                cloud.x[i] += 417;
             }
             ctx.drawImage(CloudImg.image(i), cloud.x[i], cloud.y, cloud.width, cloud.height);
             cloud.x[i+1] = cloud.x[i] + cloud.width;
+        }
+        if(Math.round(timeRemaining) <= 5){
+            ctx.fillStyle = "red";
+            ctx.font = "bold 30px Arial";
+            ctx.fillText("TIME : " + Math.round(timeRemaining), time.x, time.y);
+        }else if(Math.round(timeRemaining) <= 10 && Math.round(timeRemaining) >= 6){
+            ctx.fillStyle = "purple";
+            ctx.font = "bold 30px Arial";
+            ctx.fillText("TIME : " + Math.round(timeRemaining), time.x, time.y);
+        }else{
+            ctx.fillStyle = "black";
+            ctx.font = "bold 30px Arial";
+            ctx.fillText("TIME : " + Math.round(timeRemaining), time.x, time.y);
         }
         // 사각형 그리기
         ctx.lineWidth = 4;
@@ -375,33 +392,33 @@ function Breathe() {
         ctx.strokeRect(rect.x[3], rect.y, rect.width, rect.height);
         // 화살표 위치
         MakeRandom();
-        // 알맞게 누르면
-        if(firstStart == true || left.breath == true || left.y >= rect.y + 6){
+        // 박스에 들어오면 화살표 y위치 변경
+        if(firstStart == true || left.catch == true || left.y >= rect.y + 6){
             left.y = -startLocation[0];
-            left.breath = false;
+            left.catch = false;
             breath = false;
         }
-        if(firstStart == true || up.breath == true || up.y >= rect.y + 6){
+        if(firstStart == true || up.catch == true || up.y >= rect.y + 6){
             up.y = -startLocation[1];
-            up.breath = false;
+            up.catch = false;
             breath = false;
         }
-        if(firstStart == true || right.breath == true || right.y >= rect.y + 6){
+        if(firstStart == true || right.catch == true || right.y >= rect.y + 6){
             right.y = -startLocation[2];
-            right.breath = false;
+            right.catch = false;
             breath = false;
         }
-        if(firstStart == true || down.breath == true || down.y >= rect.y + 6){
+        if(firstStart == true || down.catch == true || down.y >= rect.y + 6){
             down.y = -startLocation[3];
-            down.breath = false;
+            down.catch = false;
             breath = false;
         }
         ctx.drawImage(left.img, left.x, left.y, left.width, left.height);
         ctx.drawImage(up.img, up.x, up.y, up.width, up.height);
         ctx.drawImage(right.img, right.x, right.y, right.width, right.height);
         ctx.drawImage(down.img, down.x, down.y, down.width, down.height);
-        // 최대 속도 15
-        if(speed < 15){
+        // 최대 속도 16
+        if(speed < 16){
             speed += speedUp;
         }
         left.y += speed;
@@ -411,60 +428,61 @@ function Breathe() {
         firstStart = false;
 
         // 성공 or 실패
-        // 인공호흡 진행 후 5분이 지났는지 체크 (오류-수정중)
-        currentMin = today.getMinutes();
-        currentHour = today.getHours();
-        if(breathCount >= breathNum) {
-            ctx.fillStyle = "red";
-            ctx.font = "bold 60px Arial";
-            ctx.fillText("CPR 성공", (canvas_cpr.width / 2) - 120, (canvas_cpr.height / 2) + 30);
+        if(timeRemaining >= 0 && breathCount >= breathNum) {
+            clearInterval(playBreath);
             breathSuccess = true;
+            PrintImg(ctx_img, endImg, 0, 0, canvas_img.width, canvas_img.height);
+            canvas_img.style.display = "block";
+            canvas_cpr.style.display = "none";
+        } else if(timeRemaining <= 0 && breathCount < breathNum){
             clearInterval(playBreath);
+            replayBreathImgOpen = true;
+            breathSuccess = false;
+            PrintImg(ctx_img, replayBreathImg, 0, 0, canvas_img.width, canvas_img.height);
+            canvas_img.style.display = "block";
+            canvas_cpr.style.display = "none";
         }
-        if((breathCount < breathNum) && 
-        ((currentMin - startMin >= 5) || ((currentMin - startMin <= 0) && (currentHour != startHour)))){
-            ctx.fillStyle = "red";
-            ctx.font = "bold 60px Arial";
-            ctx.fillText("CPR 실패", (canvas_cpr.width / 2) - 120, (canvas_cpr.height / 2) + 30);
-            clearInterval(playBreath);
+        // 시간 흐름
+        if(timeRemaining > 0 && breathSuccess == false) {
+            timeRemaining -= 1/30;
         }
     }, FPS);
 }
 
-// 시작 위치 랜덤 지정
+// 화살표 시작 위치 랜덤 지정
 function MakeRandom() {
     for (var i = 0; i < 4; i++) {
-        var randomLocation = Math.floor(Math.random() * (180-60+1)) + 60;
+        var randomLocation = Math.floor(Math.random() * (420-60+1)) + 60;
         startLocation[i] = randomLocation;
     }
 }
 function BreatheKeyDown(event) {
     // 방향에 맞는 키를 누른 경우
     if(event.keyCode == 37 && (left.y + (left.height/accuracy) >= rect.y)){
-        left.breath = true;
+        left.catch = true;
         breath = true;
         breathCount++;
         CloudImg.fill();
     }
     if(event.keyCode == 38 && (up.y + (up.height/accuracy) >= rect.y)){
-        up.breath = true;
+        up.catch = true;
         breath = true;
         breathCount++;
         CloudImg.fill();
     }
     if(event.keyCode == 39 && (right.y + (right.height/accuracy) >= rect.y)){
-        right.breath = true;
+        right.catch = true;
         breath = true;
         breathCount++;
         CloudImg.fill();
     }
     if(event.keyCode == 40 && (down.y + (down.height/accuracy) >= rect.y)){
-        down.breath = true;
+        down.catch = true;
         breath = true;
         breathCount++;
         CloudImg.fill();
     }
-    // 누른 버튼 위치 깜빡임
+    // 박스 누르면 깜빡임
     if(event.keyCode == 37){
         setTimeout(function(){
             ctx.fillStyle = "rgba(217, 73, 37, 0.5)";
@@ -491,26 +509,181 @@ function BreatheKeyDown(event) {
     }
     // 잘못 누른 경우
     if(event.keyCode == 37 && (left.y + left.height < rect.y)){
-        CloudImg.minusFill();
-        breathCount--;
+        Miss();
     }
     if(event.keyCode == 38 && (up.y + up.height < rect.y)){
-        CloudImg.minusFill();
-        breathCount--;
+        Miss();
     }
     if(event.keyCode == 39 && (right.y + right.height < rect.y)){
-        CloudImg.minusFill();
-        breathCount--;
+        Miss();
     }
     if(event.keyCode == 40 && (down.y + down.height < rect.y)){
-        CloudImg.minusFill();
-        breathCount--;
+        Miss();
     }
-    // MyEvent.preventDefault();
+    // event.preventDefault();
 }
-addEventListener("keydown", CompressKeyDown);
-addEventListener("keydown", BreatheKeyDown);
-addEventListener("click", CompressClick);
+// 인공호흡에서 방향키 잘못 눌렀을 때 (count--)
+function Miss() {
+    CloudImg.minusFill();
+    breathCount--;
+    if(breathCount < 0){
+        breathCount = 0;
+    }
+}
+// 이미지 출력
+function PrintImg(ctx_img, image, x, y, w, h) {
+    var img = new Image;
+    img.src = image;
+    img.onload = function() {
+        ctx_img.clearRect(0, 0, canvas_img.width, canvas_img.height);
+        ctx_img.drawImage(img, x, y, w, h);
+        // ctx_img.strokeStyle = "rgb(105, 36, 152)";
+        // ctx_img.strokeRect(1136, 12, 48, 48);
+    };
+}
 
-Compress();
-MakeCompress();
+// 버튼 클릭 이벤트 (초기 화면)
+canvas_img.onselectstart = function () {
+    return false;
+};
+canvas_img.addEventListener("click", function(event){
+    var x = event.clientX - canvas_img.offsetLeft;
+    var y = event.clientY - canvas_img.offsetTop;
+    var btn = {
+        ruleX : 85,
+        startX : 801,
+        y : 367,
+        w : 314,
+        h : 103,
+    }
+    var close = {
+        x : 1136,
+        y : 12,
+        w : 48,
+        h : 48
+    }
+    // rule 버튼 클릭 시
+    if(startImgOpen == true && ((x > btn.ruleX && x < btn.ruleX+btn.w) && (y > btn.y && y < btn.y+btn.h))){
+        ruleImgOpen = true;
+        startImgOpen = false;
+        PrintImg(ctx_img, ruleImg, 0, 0, canvas_img.width, canvas_img.height);
+    }
+    // rule의 닫기 버튼 클릭 시
+    if(ruleImgOpen == true && ((x > close.x && x < close.x+close.w) && (y > close.y && y < close.y+close.h))){
+        ruleImgOpen = false;
+        startImgOpen = true;
+        PrintImg(ctx_img, startImg, 0, 0, canvas_img.width, canvas_img.height);
+    }
+    // start 버튼 클릭 시
+    if(startImgOpen == true && ((x > btn.startX && x < btn.startX+btn.w) && (y > btn.y && y < btn.y+btn.h))){
+        startImgOpen = false;
+        canvas_cpr.style.display = "block";
+        canvas_img.style.display = "none";
+        Compress();
+        MakeCompression();
+    }
+    // 흉부압박 replay 버튼 클릭 시
+    if(replayCompressionImgOpen == true && ((x > btn.startX && x < btn.startX+btn.w) && (y > btn.y && y < btn.y+btn.h))){
+        Replay();
+        replayCompressionImgOpen = false;
+        canvas_cpr.style.display = "block";
+        canvas_img.style.display = "none";
+        Compress();
+        MakeCompression();
+    }
+    // 인공호흡 replay 버튼 클릭 시
+    if(replayBreathImgOpen == true && ((x > btn.startX && x < btn.startX+btn.w) && (y > btn.y && y < btn.y+btn.h))){
+        Replay();
+        replayBreathImgOpen = false;
+        canvas_cpr.style.display = "block";
+        canvas_img.style.display = "none";
+        Breathe();
+    }
+    // 중간에 home 버튼 클릭 시 => 초기 화면으로 (+변수 초기화)
+    if((replayCompressionImgOpen == true || replayBreathImgOpen == true) && 
+    ((x > btn.ruleX && x < btn.ruleX+btn.w) && (y > btn.y && y < btn.y+btn.h))){
+        replayCompressionImgOpen = true;
+        replayBreathImgOpen = true;
+        Replay();
+        ruleImgOpen = false;
+        startImgOpen = true;
+        replayCompressionImgOpen = false;
+        replayBreathImgOpen = false;
+        compressionSuccess = false;
+        breathSuccess = false;
+        PrintImg(ctx_img, startImg, 0, 0, canvas_img.width, canvas_img.height);
+    }
+});
+
+// 버튼 객체 생성
+const leftButton = new Path2D();
+const rightButton = new Path2D();
+const closeButton = new Path2D();
+leftButton.roundedRect = function(obj, x, y, width, height, radius) {
+    obj.moveTo(x, y + radius);
+    obj.lineTo(x, y + height - radius);
+    obj.arcTo(x, y + height, x + radius, y + height, radius);
+    obj.lineTo(x + width - radius, y + height);
+    obj.arcTo(x + width, y + height, x + width, y + height-radius, radius);
+    obj.lineTo(x + width, y + radius);
+    obj.arcTo(x + width, y, x + width - radius, y, radius);
+    obj.lineTo(x + radius, y);
+    obj.arcTo(x, y, x, y + radius, radius);
+}
+rightButton.roundedRect = function(obj, x, y, width, height, radius) {
+    obj.moveTo(x, y + radius);
+    obj.lineTo(x, y + height - radius);
+    obj.arcTo(x, y + height, x + radius, y + height, radius);
+    obj.lineTo(x + width - radius, y + height);
+    obj.arcTo(x + width, y + height, x + width, y + height-radius, radius);
+    obj.lineTo(x + width, y + radius);
+    obj.arcTo(x + width, y, x + width - radius, y, radius);
+    obj.lineTo(x + radius, y);
+    obj.arcTo(x, y, x, y + radius, radius);
+}
+leftButton.roundedRect(leftButton, 89, 369, 307, 99, 35);
+rightButton.roundedRect(rightButton, 804, 369, 307, 99, 35);
+closeButton.arc(1161, 36, 21.7, 0, Math.PI * 2);
+ctx_img.beginPath();
+ctx_img.lineWidth = 7;
+ctx_img.strokeStyle = "rgb(217, 73, 37)";
+ctx_img.stroke(leftButton);
+ctx_img.strokeStyle = "rgb(86, 138, 53)";
+ctx_img.stroke(rightButton);
+
+// 버튼 hover
+canvas_img.addEventListener("mousemove", function(event) {
+    // leftButton
+    if (startImgOpen || replayCompressionImgOpen || replayBreathImgOpen) {
+        if(ctx_img.isPointInPath(leftButton, event.offsetX, event.offsetY)){
+            ctx_img.strokeStyle = "orange";
+        } else {
+            ctx_img.strokeStyle = "rgb(217, 73, 37)";
+        }
+        ctx_img.lineWidth = 7;
+        ctx_img.stroke(leftButton);
+    }
+    //rightButton
+    if (startImgOpen || replayCompressionImgOpen || replayBreathImgOpen) {
+        if(ctx_img.isPointInPath(rightButton, event.offsetX, event.offsetY)){
+            ctx_img.strokeStyle = "orange";
+        } else {
+            ctx_img.strokeStyle = "rgb(86, 138, 53)";
+        }
+        ctx_img.lineWidth = 7;
+        ctx_img.stroke(rightButton);
+    }
+    // closeButton
+    if (ruleImgOpen) {
+        if(ctx_img.isPointInPath(closeButton, event.offsetX, event.offsetY)){
+            ctx_img.strokeStyle = "gray";
+        } else {
+            ctx_img.strokeStyle = "rgb(89, 89, 89)";
+        }
+        ctx_img.lineWidth = 5;
+        ctx_img.stroke(closeButton);
+    }
+});
+
+PrintImg(ctx_img, startImg, 0, 0, canvas_img.width, canvas_img.height);
+addEventListener("keydown", BreatheKeyDown);
