@@ -4,7 +4,6 @@ var img = new Image();
 var life = 3;
 
 
-
 class Player {
     constructor(x, y) {
         this.x = x;
@@ -57,7 +56,6 @@ class Player {
         if (this.x <= 0) {
             this.x = 0;
         }
-
     }
 }
 class Virus {
@@ -101,6 +99,7 @@ class Virus {
 }
 
 
+
 function makeVirus() {
     if (!dead) {
         var a = new Virus(Math.floor(Math.random() * 800), -50);
@@ -109,9 +108,7 @@ function makeVirus() {
     }
 
 }
-function death() {
 
-}
 function moreSpeed() {
     setInterval(function () {
         spawnSpeed--;
@@ -120,6 +117,7 @@ function moreSpeed() {
 
 
 var p;
+var score = 0;
 var gravity = 0.1;
 var canJump = false;
 var virus = [];
@@ -127,6 +125,7 @@ var spawnSpeed = 1000;
 var dead = false;
 window.onload = function () {
     start();
+    setInterval(addScore, 1000);
     setInterval(update, 10);
 }
 function start() {
@@ -136,42 +135,53 @@ function start() {
     moreSpeed();
 
 }
+
+function addScore() {
+    if(!dead){
+        score = score + 10;
+    }
+    
+}
+
 function update() {
+    //목숨
     if (life == 3) {
-        img.src = './images/game_virus/h4.png';
+        img.src = './images/game_virus/./h4.png';
         img.onload = function () {
             c.drawImage(img, 10, 10);
         }
     }
     if (life == 2) {
-        img.src = './images/game_virus/h3.png';
+        img.src = './images/game_virus/./h3.png';
         img.onload = function () {
             c.drawImage(img, 10, 10);
         }
     }
     if (life == 1) {
-        img.src = './images/game_virus/h2.png';
+        img.src = './images/game_virus/./h2.png';
         img.onload = function () {
             c.drawImage(img, 10, 10);
         }
     }
     if (life == 0) {
-        img.src = './images/game_virus/h1.png';
+        img.src = './images/game_virus/./h1.png';
         img.onload = function () {
             c.drawImage(img, 10, 10);
         }
     }
     if (life == -1) {
-        img.src = './images/game_virus/h0.png';
+        img.src = './images/game_virus/./h0.png';
         img.onload = function () {
             c.drawImage(img, 10, 10);
         }
     }
 
 
+
     //배경
     c.fillStyle = '#330000';
     c.fillRect(0, 0, 800, 800);
+
     //지면
     c.fillStyle = '#660000'
     c.fillRect(0, 750, 800, 100);
@@ -229,6 +239,15 @@ function update() {
     }
     document.onkeydown = keyDown;
     document.onkeyup = keyUp;
+
+    c.fillText("Score: " + score, 15, 120);
+    c.font = "30px malgun gothic";
+
+
+
+
+
+
 
 
 
