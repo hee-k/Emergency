@@ -61,32 +61,32 @@
                     </li>
                 </ul>
                 <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="입력하세요." aria-label="Search">
-                    <button class="btn btn-success" type="submit">Search</button>
+                    <input id="text" class="form-control me-2" type="search" placeholder="입력하세요." aria-label="Search">
+                    <button id="searchButton" class="btn btn-success" type="button">Search</button>
                 </form>
             </div>
         </div>
     </nav>
     <div class="intro_bg">
+        <div class="link">
+            <ul>
+                <li>
+                    <a href="https://www.youtube.com/watch?v=q7J2T6MFA9g" target="_blank" title="AED사용법">
+                        <img src="./images/aed.png" width="40" height="40">
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.e-gen.or.kr/egen/search_emergency_room.do" target="_blank" title="응급실찾기">
+                        <img src="./images/hospital.png" width="40" height="40">
+                    </a>
+                </li>
+            </ul>
+        </div>
         <div class="intro_text">
             <h1><b>응급상황에 빠르게 대처하세요</b></h1>
             <h5>위급한 상황에 처해있으신가요? '일상 속 위기 탈출'사이트에서 대처법을 손쉽게 찾아보세요.</h5>
         </div>
     </div>
-    <!--
-    <div class="banner_wrapper">
-        <div class="banners">
-            1
-        </div>
-        <div class="banners">
-            2
-        </div>
-    </div>
-    <div class="btns">
-        <span class="btn1">1</span>
-        <span class="btn2">2</span>
-    </div>
-    -->
     <div class="slide_wrapper">
         <ul class="slides">
             <li>
@@ -126,6 +126,7 @@
         <span class="next">다음</span>
     </p>
     <script src="./scripts/index.js"></script>
+    <script src="./scripts/search.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/8d7f9ad8fc.js" crossorigin="anonymous"></script>
 </body>
