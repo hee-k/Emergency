@@ -155,7 +155,7 @@ var PatientImg = new Image();
 PatientImg.src = "./images/game_cpr/patient.png";
 var TextImg = new Image();
 TextImg.src = "./images/game_cpr/text.png";
-var timeRemaining = 20;         // 남은 시간
+var timeRemaining = 30;         // 남은 시간
 var orgTimeRemaining = timeRemaining;
 var FPS = 50;
 
@@ -298,7 +298,7 @@ function MakeCompression(){
     }, (Math.floor(Math.random() * (2000-1000+1)) + 1000));
     stopMakeCompression = setInterval(function(){
         makeCompression = false;
-    }, (Math.floor(Math.random() * (1000-800+1)) + 800));
+    }, (Math.floor(Math.random() * (1300-1000+1)) + 1000));
 }
 // 재시작(변수 초기화)
 function Replay() {
