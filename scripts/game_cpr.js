@@ -298,7 +298,7 @@ function MakeCompression(){
     }, (Math.floor(Math.random() * (2000-1000+1)) + 1000));
     stopMakeCompression = setInterval(function(){
         makeCompression = false;
-    }, (Math.floor(Math.random() * (1300-1000+1)) + 1000));
+    }, (Math.floor(Math.random() * (1000-800+1)) + 800));
 }
 // 재시작(변수 초기화)
 function Replay() {
